@@ -38,9 +38,6 @@ const headerAppender = (selector) => {
   //
   const header = document.querySelector(selector);
   const context = Header("Lambda Times", "18/04/22", "23");
-  console.log(header);
-  console.log(context);
-
   header.appendChild(context);
   return header;
 };
