@@ -16,9 +16,10 @@ const Header = (title, date, temp) => {
   const spanDate = document.createElement("span");
   const spanTemp = document.createElement("span");
   h1.textContent = title;
-  spanDate.classList.add = "date";
+  parentElement.classList.add("header");
+  spanDate.classList.add("date");
   spanDate.textContent = date;
-  spanTemp.classList.add = "temp";
+  spanTemp.classList.add("temp");
   spanTemp.textContent = temp;
   h1.textContent = title;
   parentElement.appendChild(spanDate);
@@ -36,7 +37,9 @@ const headerAppender = (selector) => {
   // It should append the header to the element in the DOM that matches the given selector.
   //
   const header = document.querySelector(selector);
-  const context = Header("Hello", "23/09/22", "23 C");
+  const context = Header("Lambda Times", "18/04/22", "23");
+  console.log(header);
+  console.log(context);
 
   header.appendChild(context);
   return header;
