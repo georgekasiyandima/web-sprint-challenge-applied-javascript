@@ -52,9 +52,7 @@ const tabsAppender = (selector) => {
     .finally(() => {
       console.log("Done!!");
     });
-  // console.log(topics)
-  // const context = Tabs(topics);
-  //
+
   console.log(tabsContainer);
   return tabsContainer;
 };

@@ -1,3 +1,5 @@
+import axios from "axios";
+
 const Card = (article) => {
   // TASK 5
   // ---------------------
@@ -17,7 +19,35 @@ const Card = (article) => {
   //   </div>
   // </div>
   //
-}
+  const articleCard = document.createElement("div");
+  const headlineElement = document.createElement("div");
+  const authorElement = document.createElement("div");
+  const imgContainer = document.createElement("div");
+  const authorImg = document.createElement("img");
+  const authorName = document.createElement("span");
+
+  articleCard.classList.add("card");
+  headlineElement.classList.add("headline");
+  authorElement.classList.add("author");
+  imgContainer.classList.add("img-container");
+
+  headlineElement.textContent = article.headline;
+  authorImg.alt = "Author Image";
+  authorImg.src = article.authorPhoto;
+  authorName.textContent = article.authorName;
+
+  imgContainer.appendChild(authorImg);
+  authorElement.appendChild(imgContainer);
+  authorElement.appendChild(authorName);
+  articleCard.appendChild(headlineElement);
+  articleCard.appendChild(authorElement);
+
+  articleCard.addEventListener("click", () => {
+    console.log(article.headline);
+  });
+
+  return articleCard;
+};
 
 const cardAppender = (selector) => {
   // TASK 6
@@ -28,6 +58,27 @@ const cardAppender = (selector) => {
   // Create a card from each and every article object in the response, using the Card component.
   // Append each card to the element in the DOM that matches the selector passed to the function.
   //
-}
+  const articleContainer = document.querySelector(selector);
 
-export { Card, cardAppender }
+  axios
+    .get("http://localhost:5001/api/articles")
+    .then((res) => {
+      const obj = res.data.articles;
+      Object.values(obj).forEach((section) => {
+        section.forEach((article) => {
+          const card = Card(article);
+          articleContainer.appendChild(card);
+        })
+      });
+    })
+    .catch((err) => {
+      console.error(err);
+    })
+    .finally(() => {
+      console.log("Done!!");
+    });
+
+  return articleContainer;
+};
+
+export { Card, cardAppender };
